@@ -1,4 +1,5 @@
 import Foundation 
+
 public struct LoginResponse: Decodable, Hashable, Encodable, Sendable {
     public let access_token: String 
     public let refresh_token: String 

@@ -1,14 +1,14 @@
 import Foundation 
-import os.log
 
 @available(iOS 15, macOS 12, *)
 public class TicketApi: @unchecked Sendable {
     public static let shared: TicketApi = TicketApi()
-    public let session: URLSession = {
+    let session: URLSession = {
         let configuration = URLSessionConfiguration.default
+        let delegate = SessionDelegate.shared
         configuration.httpCookieStorage = HTTPCookieStorage.shared
         configuration.timeoutIntervalForRequest = 10 
-        return URLSession(configuration: configuration)
+        return URLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }()
 
     // MARK: - Login 
@@ -18,7 +18,7 @@ public class TicketApi: @unchecked Sendable {
         var request = URLRequest(url: TicketUrl.login.url)
         request.httpMethod = "POST"
         request.timeoutInterval = 10 
-        request.setValue("application/json", forHTTPHeaderField: "Content_Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("Basic NloyWGNna01Ra1h0VVdDeHk2eTdlT0syWklBYTpXSGtqTDc4dFVIbHdNUGo3ZmRfRkY1a1UyaElh", forHTTPHeaderField: "Authorization")
 
