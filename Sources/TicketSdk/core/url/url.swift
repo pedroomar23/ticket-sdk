@@ -1,6 +1,6 @@
 import Foundation
 
-public enum TicketUrl {
+enum TicketUrl {
     private static let ticketUrl = "https://ticket.xutil.net"
 
     case login 
